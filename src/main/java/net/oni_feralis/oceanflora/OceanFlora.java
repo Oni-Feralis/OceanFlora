@@ -2,6 +2,7 @@ package net.oni_feralis.oceanflora;
 
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.oni_feralis.oceanflora.block.ModBlocks;
 import net.oni_feralis.oceanflora.item.ModItems;
 import org.slf4j.Logger;
 
@@ -35,6 +36,7 @@ public class OceanFlora {
         NeoForge.EVENT_BUS.register(this);
 
         ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
@@ -51,6 +53,10 @@ public class OceanFlora {
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.accept(ModItems.SEATATO);
+        }
+
+        if(event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS){
+            event.accept(ModBlocks.SEATATO_BLOCK);
         }
     }
 
