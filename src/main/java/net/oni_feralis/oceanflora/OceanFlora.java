@@ -1,7 +1,12 @@
 package net.oni_feralis.oceanflora;
 
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.oni_feralis.oceanflora.block.ModBlocks;
 import net.oni_feralis.oceanflora.item.ModItems;
 import org.slf4j.Logger;
@@ -51,17 +56,26 @@ public class OceanFlora {
 
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.accept(ModItems.SEATATO);
         }
 
-        if(event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS){
-            event.accept(ModBlocks.SEATATO_BLOCK);
+        if (event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {
+            event.accept(ModBlocks.SEATATO_CROP);
         }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
+    }
+
+    @EventBusSubscriber(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    public static class ClientModEvents {
+        @SubscribeEvent
+        public static void onClientSetup(FMLClientSetupEvent event) {
+
+        }
+
     }
 }
